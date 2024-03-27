@@ -1,49 +1,48 @@
 -- Sample INSERT Statements for Financial Advising Company Schema
 use crm;
 -- Inserting data into Companies
-INSERT INTO Companies (name, description) VALUES
-('Alpha Investments', 'A leading investment firm specializing in stocks and bonds'),
-('Beta Financial Services', 'Offers a wide range of financial services including wealth management'),
-('Gamma Capital', 'Focused on private equity and venture capital investments');
+-- Insert sample data into Colleges table
+INSERT INTO Colleges (CollegeID, CollegeName, Location)
+VALUES 
+    (1, 'Example College 1', 'City A'),
+    (2, 'Example College 2', 'City B');
 
--- Inserting data into Customers
-INSERT INTO Customers (first_name, last_name, rating, company_id) VALUES
-('John', 'Doe', 5, 1),
-('Jane', 'Smith', 4, 2),
-('Alice', 'Johnson', 3, 3);
+-- Insert sample data into Departments table
+INSERT INTO Departments (DepartmentID, DepartmentName)
+VALUES 
+    (1, 'Computer Science'),
+    (2, 'Electrical Engineering');
 
--- Inserting data into Departments
-INSERT INTO Departments (name) VALUES
-('Sales'),
-('Marketing'),
-('Finance');
+-- Insert sample data into Students table
+INSERT INTO Students (StudentID, FirstName, LastName,  Gender,  Email, Phone)
+VALUES 
+    (1, 'John', 'Doe', 'Male', City A', 'john.doe@example.com', '123-456-7890'),
+    (2, 'Jane', 'Smith', 'Female', 'jane.smith@example.com', '987-654-3210');
 
--- Inserting data into Employees
-INSERT INTO Employees (first_name, last_name, department_id) VALUES
-('Robert', 'Brown', 1),
-('Emily', 'Davis', 1),
-('Michael', 'Wilson', 2);
+-- Insert sample data into Courses table
+INSERT INTO Courses (CourseID, CourseName, DepartmentID, Instructor)
+VALUES 
+    (101, 'Introduction to Programming', 1, 'Dr. Smith'),
+    (102, 'Database Management', 1, 'Prof. Johnson'),
+    (103, 'Digital Circuits', 2, 'Dr. Williams');
 
--- Inserting data into Products
-INSERT INTO Products (name, description) VALUES
-('Investment Plan A', 'Comprehensive investment plan for long-term growth'),
-('Retirement Fund B', 'Retirement fund with a focus on stability and steady income'),
-('Equity Package C', 'Diverse equity package for aggressive growth');
+-- Insert sample data into Enrollments table
+INSERT INTO Enrollments (EnrollmentID, StudentID, CourseID, EnrollmentDate, Grade)
+VALUES 
+    (1, 1, 101, '2023-09-01', 'A'),
+    (2, 1, 102, '2023-09-01', 'B'),
+    (3, 2, 101, '2023-09-01', 'B');
 
--- Inserting data into Sales
-INSERT INTO Sales (product_id, employee_id, customer_id, quantity, sale_date) VALUES
-(1, 1, 1, 10, '2024-01-15'),
-(2, 1, 2, 5, '2024-01-20'),
-(3, 2, 3, 15, '2024-01-25');
+-- Insert sample data into CourseStudents table (for course-student relationships)
+INSERT INTO CourseStudents (StudentID, CourseID)
+VALUES 
+    ( 1, 101),
+    ( 1, 102),
+    (2, 101);
 
--- Inserting data into EmployeeCustomer
-INSERT INTO EmployeeCustomer (employee_id, customer_id) VALUES
-(1, 1),
-(2, 2),
-(1, 3);
-
--- Inserting data into EmployeeProduct
-INSERT INTO EmployeeProduct (employee_id, product_id) VALUES
-(1, 1),
-(1, 2),
-(2, 3);
+-- Insert sample data into CourseDepartments table (for course-department relationships)
+INSERT INTO CourseDepartments (CourseDepartmentID, CourseID, DepartmentID)
+VALUES 
+    ( 101, 1),
+    ( 102, 1),
+    ( 103, 2);

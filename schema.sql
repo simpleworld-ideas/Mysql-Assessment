@@ -4,71 +4,65 @@ CREATE DATABASE crm;
 USE crm;
 
 -- Creating Companies Table
-CREATE TABLE Companies (
-    company_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    description TEXT
+-- Table for storing student details
+CREATE TABLE Students (
+    StudentID INT AUTO_INCREMENT PRIMARY KEY,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    Gender VARCHAR(10),
+    Email VARCHAR(100),
+    Phone VARCHAR(20)
 );
 
--- Creating Customers Table
-CREATE TABLE Customers (
-    customer_id INT AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(255) NOT NULL,
-    last_name VARCHAR(255) NOT NULL,
-    rating INT,
-    company_id INT,
-    FOREIGN KEY (company_id) REFERENCES Companies(company_id)
+-- Table for storing course details
+CREATE TABLE Courses (
+    CourseID INT AUTO_INCREMENT PRIMARY KEY,
+    CourseName VARCHAR(100),
+    DepartmentID INT,
+    Instructor VARCHAR(100),
+    CONSTRAINT fk_department FOREIGN KEY (DepartmentID) REFERENCES Departments(DepartmentID)
 );
 
--- Creating Departments Table
+-- Table for storing enrollment details
+CREATE TABLE Enrollments (
+    EnrollmentID INT AUTO_INCREMENT PRIMARY KEY,
+    StudentID INT,
+    CourseID INT,
+    EnrollmentDate DATE,
+    Grade VARCHAR(2),
+    CONSTRAINT fk_student FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
+    CONSTRAINT fk_course FOREIGN KEY (CourseID) REFERENCES Courses(CourseID)
+);
+
+-- Table for storing department details
 CREATE TABLE Departments (
-    department_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
+    DepartmentID INT AUTO_INCREMENT PRIMARY KEY,
+    DepartmentName VARCHAR(100)
 );
 
--- Creating Employees Table
-CREATE TABLE Employees (
-    employee_id INT AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(255) NOT NULL,
-    last_name VARCHAR(255) NOT NULL,
-    department_id INT,
-    FOREIGN KEY (department_id) REFERENCES Departments(department_id)
+
+-- Table for storing college details
+CREATE TABLE Colleges (
+    CollegeID INT AUTO_INCREMENT PRIMARY KEY,
+    CollegeName VARCHAR(100),
+    Location VARCHAR(100)
 );
 
--- Creating Products Table
-CREATE TABLE Products (
-    product_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    description TEXT
+-- Table for storing course-student relationships
+CREATE TABLE CourseStudents (
+    StudentID INT,
+    CourseID INT,
+    PRIMARY KEY (StudentID, CourseID),
+    FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
+    FOREIGN KEY (CourseID) REFERENCES Courses(CourseID)
 );
 
--- Creating Sales Table
-CREATE TABLE Sales (
-    sale_id INT AUTO_INCREMENT PRIMARY KEY,
-    product_id INT,
-    employee_id INT,
-    customer_id INT,
-    quantity INT,
-    sale_date DATE,
-    FOREIGN KEY (product_id) REFERENCES Products(product_id),
-    FOREIGN KEY (employee_id) REFERENCES Employees(employee_id),
-    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
-);
-
--- Creating EmployeeCustomer Table
-CREATE TABLE EmployeeCustomer (
-    employee_id INT,
-    customer_id INT,
-    PRIMARY KEY (employee_id, customer_id),
-    FOREIGN KEY (employee_id) REFERENCES Employees(employee_id),
-    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
-);
-
--- Creating EmployeeProduct Table
-CREATE TABLE EmployeeProduct (
-    employee_id INT,
-    product_id INT,
-    PRIMARY KEY (employee_id, product_id),
-    FOREIGN KEY (employee_id) REFERENCES Employees(employee_id),
-    FOREIGN KEY (product_id) REFERENCES Products(product_id)
+-- Table for storing course-department relationships
+CREATE TABLE CourseDepartments (
+    
+    CourseID INT,
+    DepartmentID INT,
+    PRIMARY KEY (CourseID, DepartmentID),
+     FOREIGN KEY (CourseID) REFERENCES Courses(CourseID),
+     FOREIGN KEY (DepartmentID) REFERENCES Departments(DepartmentID)
 );
